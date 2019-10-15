@@ -1,0 +1,470 @@
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+        b{
+            font-size: 20px;
+            font-family: serif;
+
+        }
+            .cardstyle{
+               display: inline-block;
+               margin: 10px;
+               max-width: 355px;
+               border-radius:4.5PX;
+               background-color: rgb(255, 255, 255);
+               box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+           }
+           .close{
+               cursor: pointer;
+               border: none;
+               background-color: red;
+               color: aliceblue;
+               position: absolute;
+               margin-left: 233px;
+           }
+           .close:hover{
+               background-color:black;
+           }
+           .details1{
+              color: blue;
+        font-size: 35px;
+        text-align: center;
+        text-shadow: 2px 2px black;
+        font-family: serif;
+           }
+           .details2{
+           color: red;
+        font-size: 25px;
+        font-family: cursive;
+        text-align: center;
+           }
+           .details3{
+            color: grey;
+            font-size: 22px;
+            text-align: center;
+           }
+                           li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 8px 14px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+        </style>
+    </head>
+    <body>
+        <div id="data">
+
+            <div class="w3-bar w3-black">
+                <a href="index.html" class="w3-bar-item w3-button w3-mobile">Home</a>
+          <li class="dropdown">
+                <a class="dropbtn">Admin</a>
+                <div class="dropdown-content">
+                    <a href="l1.html">Register</a>
+                    <a href="r1.html">Admin-login</a>
+                </div>
+            </li>
+          <!-- <a href="signup.html" class="w3-bar-item w3-button w3-mobile">Sign-In</a> -->
+          <li class="dropdown">
+                <a class="dropbtn">User</a>
+                <div class="dropdown-content">
+                    <a href="l2.html">Register</a>
+                    <a href="r2.html">User-Login</a>
+                </div>
+            </li>
+          <a href="cont.html" class="w3-bar-item w3-button w3-right">Contact</a>
+          <a href="index.html" class="w3-bar-item w3-button w3-right">Logout</a>
+        </div>
+            <center>
+                <h1 style="background-image: url(http://arkansasconsumer.org/wp-content/uploads/2015/04/Electronic-Products1.jpg );width: 100%;height: 15%;color: red">Online-Shopping</h1>
+                
+                <br>
+                 <hr>
+                <br>
+                <br>
+                <form id="inputfields">
+                    <b>Product Id:</b> <input id="pid" type="text"> <br> <br>
+                    <b>Product Name:</b> <input id="pname" type="text"> <br> <br>
+                    <b>Product Price:</b> <input id="pprice" type="text"> <br> <br>
+                    <b>Product Image:</b> <input id="pimage" type="text"> <br> <br>
+                    <b>Product Description:</b> <input id="pdescription" type="text"> <br> <br>
+                    <input id="show" type="button" value="Submit" onclick=display()>
+                </form>
+            </center>
+        </div>
+        
+        <div id="pcardset">
+
+        </div>
+        
+        
+    </body>
+    <script>
+        function display(){
+            event.preventDefault();
+            // INPUT FIELDS
+            var input_form=document.getElementById("inputfields");
+            var cardset=document.getElementById("pcardset");
+            var id=document.getElementById("pid");
+            var name=document.getElementById("pname");
+            var price=document.getElementById("pprice");
+            var simage=document.getElementById("pimage");
+            var description=document.getElementById("pdescription");
+            // NEW SECTION
+            var productcard=document.createElement("div");
+            productcard.classList.add("cardstyle");
+            productcard.id="card"+Math.random();
+            cardset.appendChild(productcard);
+
+            // CLOSE BUTTON
+            var close=document.createElement("button");
+            close.classList.add("close");
+            var node = document.createTextNode("X");
+            close.appendChild(node);
+            // close.style.display="none";
+            productcard.appendChild(close);
+            close.setAttribute("onclick","test()")
+            close.onclick= function test(e){
+                document.getElementById(e.target.parentNode.id).remove();
+            }
+            // INPUT FIELD VALUE
+            var anchor = document.createElement("a");
+            anchor.setAttribute("href","main2.html");
+            anchor.setAttribute("target","blank");
+            
+            var productimage = document.createElement("img");
+            productimage.setAttribute("src",simage.value);
+            productimage.setAttribute("height","350px");
+            productimage.setAttribute("width","250px");
+            productimage.style.borderRadius="4.5px";
+            productimage.addEventListener("click",click);
+            anchor.appendChild(productimage);
+            productimage.addEventListener("mouseover", mouseOver);
+            function mouseOver() {
+                productimage.setAttribute("height","300");
+                productimage.setAttribute("width","300");
+                // close.style.display="block";
+            }
+        
+            productimage.addEventListener("mouseout", mouseOut);
+            function mouseOut() {
+                productimage.setAttribute("height","200px");
+                productimage.setAttribute("width","255px");
+                // close.style.display="none";
+            }
+            
+            var productid = document.createElement("p");
+            productid.classList.add("details1");
+            var node = document.createTextNode(id.value);
+            productid.appendChild(node);
+            productid.a=id.value;
+
+            var productname = document.createElement("p");
+            productname.classList.add("details2");
+            var node = document.createTextNode(name.value);
+            productname.appendChild(node);
+            productname.a=name.value;
+           
+
+            var productprice = document.createElement("p");
+            productprice.classList.add("details3");
+            productprice.style.color="grey"
+            var node = document.createTextNode("₹" + price.value);
+            productprice.appendChild(node);
+            productprice.a=price.value;
+            
+            var productdescription = document.createElement("p");
+            productdescription.style.display="none";
+            var node = document.createTextNode(description.value);
+            productdescription.appendChild(node);
+            productdescription.a=description.value;
+
+            // Input Field values Position
+            productcard.appendChild(anchor);
+            productcard.appendChild(productid);
+            productcard.appendChild(productname);
+            productcard.appendChild(productprice);
+            productcard.appendChild(productdescription);
+
+            document.getElementById("inputfields").reset();
+            // font awesome stylesheet link
+            var fontawesomelink = document.createElement("link");
+            fontawesomelink.setAttribute("rel","stylesheet");
+            fontawesomelink.setAttribute("href","https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+            document.head.appendChild(fontawesomelink);
+
+            // likes code
+            var like_sec = document.createElement("span");
+            productcard.appendChild(like_sec);
+            
+            var likeicon = document.createElement("i");
+            likeicon.classList="fa fa-thumbs-o-up";
+            likeicon.style.marginLeft="80px";
+            likeicon.style.fontSize="25px";
+            like_sec.appendChild(likeicon);
+
+            var likescount = document.createElement("span");
+            likescount.style.fontSize="20px";
+            likescount.style.marginRight="10px";
+            like_sec.appendChild(likescount);
+            var likes=0;
+
+            likeicon.setAttribute("onclick","like()");
+            likeicon.onclick = function like(l){
+                likes++;
+                l.currentTarget.parentNode.lastChild.innerHTML=likes;
+            }
+            
+            // dislikes code
+            var dislike_sec = document.createElement("span");
+            productcard.appendChild(dislike_sec);
+
+            var dislikeicon = document.createElement("i");
+            dislikeicon.classList="fa fa-thumbs-o-down";
+            dislikeicon.style.fontSize="25px";
+            dislike_sec.appendChild(dislikeicon);
+
+            var dislikescount = document.createElement("span");
+            dislikescount.style.fontSize="20px";
+            dislike_sec.appendChild(dislikescount);
+            var dislikes=0;
+            
+            dislikeicon.setAttribute("onclick","dislike()");
+            dislikeicon.onclick = function dislike(dl){
+                dislikes++;
+                dl.currentTarget.parentNode.lastChild.innerHTML=dislikes;
+            }
+
+
+            // localstorage code
+            function click(){
+            localStorage.setItem("images",productimage.src);
+            localStorage.setItem("description",productdescription.a);
+            }
+            // editing button code
+            var edit = document.createElement("i");
+            edit.classList="fa fa-pencil-square";
+            edit.style.fontSize="25px";
+            edit.style.color="blue";
+            edit.style.cursor="pointer";
+            edit.setAttribute("onclick","edit_manager()");
+            productcard.appendChild(edit);
+
+            var cardid = document.getElementById(productcard.id).id;
+
+            // localstorage code when we click on image(it replace the values)
+            function click(){
+            localStorage.setItem("images",product_data.product_image);
+            localStorage.setItem("name",product_data.product_name);
+            localStorage.setItem("price",product_data.product_price);
+            localStorage.setItem("description",product_data.product_description);
+            localstorage.setItem("productcard",product_data.productcard);
+         /*   localstorage.setItem("productcard",product_data.product_data);*/
+            }
+
+
+          
+            // localstorage code when we submit the card details(it stores every card)
+            var product_data = {
+                card_id: cardid,
+                product_id: productid.a,
+                product_image: productimage.src,
+                product_name: productname.a,
+                product_price: productprice.a,
+                product_description: productdescription.a,
+            };
+            var product_details = JSON.parse(localStorage.getItem("productdetails"));
+            var product_details = product_details ? product_details :[];
+            product_details.push(product_data);
+            localStorage.setItem("productdetails",JSON.stringify(product_details));
+
+            var cardid_for_childnodes=document.getElementById(productcard.id);
+            var all_childnodes = cardid_for_childnodes.childNodes;
+            // console.log(all_childnodes);
+            var childs_of_anchor=anchor.childNodes;
+
+            edit.onclick = function edit_manager(){
+                var grab_data = JSON.parse(localStorage.getItem("productdetails"));
+                var req_obj = product_details.find(o => o.card_id === cardid);
+
+                document.getElementById("pid").value= req_obj.product_id;
+                document.getElementById("pname").value= req_obj.product_name;
+                document.getElementById("pprice").value= req_obj.product_price;
+                document.getElementById("pimage").value= req_obj.product_image;
+                document.getElementById("pdescription").value= req_obj.product_description;
+
+                // Save Button Code
+                var save = document.createElement("i");
+                save.classList="fa fa-bookmark-o";
+                save.style.marginLeft="50px";
+                save.style.fontSize="25px";
+                save.style.color="red";
+                save.style.cursor="pointer";
+                save.setAttribute("onclick","save_manager()");
+                save.id=cardid;
+                input_form.appendChild(save);
+
+                save.onclick = function save_manager(){
+                    var productid_for_fields = product_data.product_id=document.getElementById("pid").value;
+                    var productname_for_fields = product_data.product_name=document.getElementById("pname").value;
+                    var productprice_for_fields = product_data.product_price=document.getElementById("pprice").value;
+                    var productimage_for_fields = product_data.product_image=document.getElementById("pimage").value;
+                    var productdescription_for_fields = product_data.product_description=document.getElementById("pdescription").value;
+
+                    localStorage.setItem("productdetails",JSON.stringify(product_details));
+
+                    var required_obj = product_details.find(o => o.card_id === save.id);
+
+                    var replace_name = all_childnodes[3].textContent=required_obj.product_name;
+                    var replace_price = all_childnodes[4].textContent="₹ " + required_obj.product_price + "/-";
+                    var replace_description = all_childnodes[5].textContent=required_obj.product_description;
+                    var replace_image = childs_of_anchor[0].src=required_obj.product_image;
+
+                    document.getElementById(save.id).remove();
+                    document.getElementById("inputfields").reset();
+
+
+                }
+                
+            }
+           /* var main_sec=document.getElementById("products");
+var car_sec=document.getElementById("cars");
+var mobiles_sec=document.getElementById("mobiles");
+var other_numbers_sec=document.getElementById("other_numbers");
+
+
+var grab_data=JSON.parse(localStorage.getItem("productdetails"));
+for(i=0;i<=grab_data.length-1;i++){
+    if(grab_data[i].product_id==car_sec.id ||
+        grab_data[i].product_id==mobiles_sec.id ||
+        grab_data[i].product_id!==other_numbers_sec.id)
+
+ 
+{
+    var new_sec=document.createElement("div");
+    new_sec.classList.add("cardstyle");
+    new_sec.id="p_card"+Math.random();
+    new_sec.addEventListener("click",card_details);
+
+    if(grab_data[i].product_id==car_sec.id){
+        car_sec.appendChild(new_sec);
+    }
+    else{
+        if(grab_data[i].product_id==mobiles_sec.id){
+            mobiles_sec.appendChild(new_sec);
+    }
+    else{
+    if(grab_data[i].product_id!==other_numbers_sec.id){
+        other_numbers_sec.appendChild(new_sec);
+    }
+    }
+} 
+
+var p_img_anchor=document.createElement("a");
+p_img_anchor.setAttribute("href","userpage.html");
+p_img_anchor.setAttribute("target","_blank");
+
+var p_image=document.createElement("img");
+p_image.setAttribute("src",grab_data[i].product_image);
+p_image.setAttribute("height","200px");
+p_image.setAttribute("width","255px");
+p_img_anchor.appendChild(p_image);
+
+
+var p_id=document.createElement("p");
+var node =document.createTextNode("type:"+ grab_data[i].product_id );
+p_id.appendChild(node);
+// p_id.style.display="none";
+
+
+var p_name=document.createElement("p");
+var node =document.createTextNode("name:"+ grab_data[i].product_name);
+p_name.appendChild(node);
+// p_name.style.display="none";
+
+
+
+var p_price=document.createElement("p");
+var node =document.createTextNode("price:\u20B9"+ grab_data[i].product_price);
+p_price.appendChild(node);
+// p_price.style.display="none";
+
+
+
+var p_description =document.createElement("p");
+var node =document.createTextNode("Des:"+ grab_data[i].product_description);
+p_description.appendChild(node);
+p_description.style.display="none";
+
+
+new_sec.appendChild(p_img_anchor);
+new_sec.appendChild(p_id);
+new_sec.appendChild(p_name);
+new_sec.appendChild(p_price);
+new_sec.appendChild(p_description);
+
+
+function card_details(sec){
+    var sec_nodes=document.getElementById(sec.currentTarget.id).childNodes;
+    console.log(sec_nodes);
+    var anchor_nodes=sec_nodes[0].childNodes;
+    console.log(anchor_nodes);
+
+
+    var image=anchor_nodes[0].src;
+    var name=sec_nodes[2].textContent;
+    var price=sec_nodes[3].textContent;
+    var description=sec_nodes[4].textContent;
+
+    
+    localStorage.setItem("images",image);
+    localStorage.setItem("name",name);
+    localStorage.setItem("price",price);
+    localStorage.setItem("description",description);
+    }
+
+
+   }  
+}*/
+        } 
+           
+
+    </script>
+</html>

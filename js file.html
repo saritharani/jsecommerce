@@ -1,0 +1,102 @@
+<script>
+	var main_sec=document.getElementById("products");
+var car_sec=document.getElementById("cars");
+var mobiles_sec=document.getElementById("mobiles");
+var other_numbers_sec=document.getElementById("other_numbers");
+
+
+var grab_data=JSON.parse(localStorage.getItem("productdetails"));
+for(i=0;i<=grab_data.length-1;i++){
+    if(grab_data[i].product_id==car_sec.id ||
+        grab_data[i].product_id==mobiles_sec.id ||
+        grab_data[i].product_id!==other_numbers_sec.id)
+
+ 
+{
+    var new_sec=document.createElement("div");
+    new_sec.classList.add("cardstyle");
+    new_sec.id="p_card"+Math.random();
+    new_sec.addEventListener("click",card_details);
+
+    if(grab_data[i].product_id==car_sec.id){
+        car_sec.appendChild(new_sec);
+    }
+    else{
+        if(grab_data[i].product_id==mobiles_sec.id){
+            mobiles_sec.appendChild(new_sec);
+    }
+    else{
+    if(grab_data[i].product_id!==other_numbers_sec.id){
+        other_numbers_sec.appendChild(new_sec);
+    }
+    }
+} 
+
+var p_img_anchor=document.createElement("a");
+p_img_anchor.setAttribute("href","open in new page of link.html");
+p_img_anchor.setAttribute("target","_blank");
+
+var p_image=document.createElement("img");
+p_image.setAttribute("src",grab_data[i].product_image);
+p_image.setAttribute("height","200px");
+p_image.setAttribute("width","255px");
+p_img_anchor.appendChild(p_image);
+
+
+var p_id=document.createElement("p");
+var node =document.createTextNode("type:"+ grab_data[i].product_id );
+p_id.appendChild(node);
+// p_id.style.display="none";
+
+
+var p_name=document.createElement("p");
+var node =document.createTextNode("name:"+ grab_data[i].product_name);
+p_name.appendChild(node);
+// p_name.style.display="none";
+
+
+
+var p_price=document.createElement("p");
+var node =document.createTextNode("price:\u20B9"+ grab_data[i].product_price);
+p_price.appendChild(node);
+// p_price.style.display="none";
+
+
+
+var p_description =document.createElement("p");
+var node =document.createTextNode("Des:"+ grab_data[i].product_description);
+p_description.appendChild(node);
+p_description.style.display="none";
+
+
+new_sec.appendChild(p_img_anchor);
+new_sec.appendChild(p_id);
+new_sec.appendChild(p_name);
+new_sec.appendChild(p_price);
+new_sec.appendChild(p_description);
+
+
+function card_details(sec){
+    var sec_nodes=document.getElementById(sec.currentTarget.id).childNodes;
+    console.log(sec_nodes);
+    var anchor_nodes=sec_nodes[0].childNodes;
+    console.log(anchor_nodes);
+
+
+    var image=anchor_nodes[0].src;
+    var name=sec_nodes[2].textContent;
+    var price=sec_nodes[3].textContent;
+    var description=sec_nodes[4].textContent;
+
+    
+    localStorage.setItem("images",image);
+    localStorage.setItem("name",name);
+    localStorage.setItem("price",price);
+    localStorage.setItem("description",description);
+    }
+
+
+   }  
+}
+
+</script>

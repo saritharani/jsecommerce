@@ -1,0 +1,158 @@
+<html>
+    <head>
+        <title>EMPLOYEE LOGIN PAGE</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+        body,html{
+            height: 100%;
+            margin: 0;
+        }
+        .bg-img{
+            background-repeat: no-repeat;
+            height: 100%;
+            background-size: cover;
+            background-image: url(http://image.shutterstock.com/z/stock-photo-hand-with-e-commerce-icon-around-for-internet-and-online-shopping-concept-isolate-on-white-111037541.jpg);
+            -webkit-animation-name:example;
+            -webkit-animation-duration:4s;
+            animation-name: example;
+            animation-duration: 4s;
+        }
+        @-webkit-keyframes example{
+            from{background-image: url(http://image.shutterstock.com/z/stock-photo-hand-with-e-commerce-icon-around-for-internet-and-online-shopping-concept-isolate-on-white-111037541.jpg);}
+
+            to {background-image: url(https://image.freepik.com/free-vector/background-of-e-commerce-elements-in-flat-design_23-2147669145.jpg)}
+        }
+        @keyframes example{
+            from {background-image: url(http://image.shutterstock.com/z/stock-photo-hand-with-e-commerce-icon-around-for-internet-and-online-shopping-concept-isolate-on-white-111037541.jpg);}
+
+            to{background-image: url(https://image.freepik.com/free-vector/background-of-e-commerce-elements-in-flat-design_23-2147669145.jpg)}
+        }
+        .button {
+            background-color:black;
+            border-radius: 10px;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 4px 2px;
+            cursor: pointer;
+                }
+                li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 8px 14px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+        </style>
+    </head>
+    <body>
+        <div class="bg-img">
+         <div class="w3-bar w3-black">
+            <a href="index.html" class="w3-bar-item w3-button w3-mobile">Home</a>
+            <li class="dropdown">
+                <a class="dropbtn">Admin</a>
+                <div class="dropdown-content">
+                    <a href="r1.html">Register</a>
+                    <a href="l1.html">Admin-Login</a>
+                </div>
+            </li>
+          <!-- <a href="login.html" class="w3-bar-item w3-button w3-mobile">Login</a> -->
+          <li class="dropdown">
+                <a class="dropbtn">User</a>
+                <div class="dropdown-content">
+                    <a href="r2.html">Register</a>
+                    <a href="l2.html">User-Login</a>
+                </div>
+            </li>
+          <!-- <a href="signup.html" class="w3-bar-item w3-button w3-mobile">Sign-In</a> -->
+          <a href="cont.html" class="w3-bar-item w3-button w3-right">Contact</a>
+        </div>
+
+            <br><br><br><br><br>
+        <h2 style="text-shadow: 2px 2px #FF0000;font-size: 40px;"><center>ADMIN - LOGIN</center></h2>
+        <br>
+        <br>
+
+        <form id="inputfield"><center>
+        <b>
+            EMAIL-ID: <input id="email" type="text" > <br><br>
+            PASSWORD: <input id="pwd" type="password"> <br><br>
+            <input class="button" type="button" value="LOGIN" onclick=newpage() >
+        </b>
+        </center></form>
+        </div>
+    <script>
+    function newpage(){
+        var input_form=document.getElementById("inputfields");
+        var x=document.getElementById("email").value;
+        var y=document.getElementById("pwd").value;
+
+       /*var a= document.getElementById("email").reset();
+       var b=dropdown.getElementById("pwd").reset();*/
+        if (x.length>=6 && y.length>=6)
+        {
+        //    var a = document.createElement("object");
+        var a=localStorage.getItem(x);
+        var db_details=JSON.parse(a);
+        console.log(db_details);
+        console.log(db_details.password);
+            if (db_details.password==y)       
+                {
+                alert("admin-test");
+                window.open("main1.html","_blank");
+                }
+            else {
+                alert("password is wrong");
+            }
+        }
+        else if (x.length <= 5) {
+            alert("username should be atleast 6 characters");
+        }
+        else if (y.length <= 5) {
+            alert("password should be minimum 6 charcters");
+        }
+         document.getElementById(save.id).remove();
+                    document.getElementById("inputfields").reset();
+
+
+    }
+
+    </script>
+    </body>
+</html>

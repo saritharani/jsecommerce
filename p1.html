@@ -1,0 +1,403 @@
+<html>
+    <head>
+        <title>page2</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+            * {box-sizing: border-box;}
+            
+            .magnifingSection {
+              position: relative;
+            }
+            
+            .magnifingLens {
+              position: absolute;
+              border: 1px solid #d4d4d4;
+              /*set the size of the lens:*/
+              width: 40px;
+              height: 40px;
+            }
+            
+            .magnifingResult {
+              float: right;
+              margin-right: 300px;
+              border: 1px solid #d4d4d4;
+              /*set the size of the result div:*/
+              width: 300px;
+              height: 300px;
+            }
+
+            
+
+             /* payment details        */
+
+
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 50%; /* Full width */
+  height: 50%; /* Full height */
+  margin-left: 25%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+} 
+
+/* The Modalcredit (background) */
+.modalcredit {
+  display: none; /* Hidden by default */
+  
+
+}
+.modalcredit-content{
+    background: red;
+}
+
+
+/* The Modaldebit (background) */
+.modaldebit {
+  display: none; /* Hidden by default */
+  
+
+}
+.modaldebit{
+    background: gold;
+}
+
+
+          
+
+
+        </style>
+    </head>
+    <body>
+        <div class="magnifingSection">
+            <img src="" id="image" height="300px" width="300px">
+            <div id="magDisplay" class="magnifingResult"></div>
+        </div>
+        <p id="wholedescription"></p>
+
+                <!-- payment details     -->
+
+<h2>Payment details</h2>
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Buy now</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+    <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Quantity </h2>
+        <span id="productcount">
+        </span>
+        <button onclick="productadd()">
+                Add
+            </button>
+        <button onclick="productremove()">
+            Remove
+        </button>    
+
+    </div>
+                       <!-- credit details -->
+    <div class="modal-body">
+        
+        <button onclick="mycre()" id="mycre">Credit</button>
+        <button onclick="mydeb()" id="mydeb">Debit</button>
+        <button onclick="mycod()" id="mycod">COD</button>
+        
+    </div>
+    <!-- The Modal -->
+<div id="myModalcredit" class="modalcredit">
+
+        <!-- Modal content -->
+        <div class="modalcredit-content">
+    
+        <span class="creditclose">&times;</span>
+card number<input id="number"  type="number"><br><br>
+cvv number<input id="cvv" type="number"><br><br>
+validty year<input id="validity" type="number"><br><br>
+<center><input type="button" value=submit> </center>
+
+
+     
+    </div>
+
+</div>        
+                         <!-- debit details -->
+
+
+<!-- The Modaldebit -->
+<div id="myModaldebit" class="modaldebit">
+
+    <!-- Modal content -->
+    <div class="modaldebit-content">
+
+    <span class="debitclose">&times;</span>
+card number<input id="number"  type="number"><br><br>
+cvv number<input id="cvv" type="number"><br><br>
+validty year<input id="validity" type="number"><br><br>
+<center><input type="button" value=submit> </center>
+
+
+    
+</div>
+
+</div>
+    </body>
+    <script>
+        var imgsrc=localStorage.getItem("images");
+        var imagesrc = document.getElementById("image").src=imgsrc;
+
+        var description=localStorage.getItem("description");
+        var descrip = document.getElementById("wholedescription").innerHTML=description;
+
+        // var magDiv = document.getElementById("magDisplay");
+        // magDiv.style.display="none";
+
+        // var image = document.getElementById("image");
+        // image.addEventListener("mouseover",mouseOver);
+        // function mouseOver(){
+        //   magDiv.style.display="block";
+        // }
+
+        // Zooming Image at a Particular Position
+        function magnifing(imgId, showId){
+            var img, lens, show, cx, cy;
+            img = document.getElementById(imgId);
+            show = document.getElementById(showId);
+
+            // Create Lens
+            lens = document.createElement("div");
+            lens.setAttribute("class","magnifingLens");
+            img.parentElement.insertBefore(lens, img);
+
+            // Calculate the ratio b/w magnifingResult and Lens
+            cx = show.offsetWidth / lens.offsetWidth;
+            cy = show.offsetHeight / lens.offsetHeight;
+
+            // Set the background properties for show
+            show.style.backgroundImage = "url('" +img.src+ "')";
+            show.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+
+            // events, if someone moves the lens
+            lens.addEventListener("mousemove",lensMove);
+            img.addEventListener("mousemove",lensMove);
+
+            // event function
+            function lensMove(e){
+                var cursorPos, x, y;
+                e.preventDefault();
+
+                // Calculate the Cursor Position
+                cursorPos = getCursorPos(e);
+
+                // Calculate the Lens Position
+                lx = cursorPos.lx - (lens.offsetWidth/2);
+                ly = cursorPos.ly - (lens.offsetHeight/2);
+
+                // Prevent the Lens from being Outside the Image
+                if(lx > img.width - lens.offsetWidth){
+                    lx = img.width - lens.offsetWidth;
+                }
+                if(lx < 0){
+                    lx = 0;
+                }
+                
+                if(ly > img.height - lens.offsetHeight){
+                    ly = img.height - lens.offsetHeight;
+                }
+                if(ly < 0){
+                    ly = 0;
+                }
+
+                // Link those values to the Lens
+                lens.style.left = lx + "px";
+                lens.style.top = ly + "px";
+
+                // show what Lens Sees
+                show.style.backgroundPosition = "-" + (lx * cx) + "px -" + (ly * cy) + "px";
+            }
+            function getCursorPos(e) {
+                var imgPositions, lx = 0, ly = 0;
+                e = e || window.event;
+                
+                // get the x and y positions of the image
+                imgPositions = img.getBoundingClientRect();
+
+                // calculate the cursor's x and y coordinates, relative to the image
+                lx = e.pageX - imgPositions.left;
+                ly = e.pageY - imgPositions.top;
+
+                // consider any page scrolling
+                lx = lx - window.pageXOffset;
+                ly = ly - window.pageYOffset;
+                return {lx : lx, ly : ly};
+            }
+            
+        }
+        magnifing("image","magDisplay");
+
+     // payment details
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+                     
+
+                    // add button
+var add=1;   
+function productadd() {
+document.getElementById("productcount").innerHTML = ++add;
+}
+
+
+                   // remove button  
+function productremove() {
+document.getElementById("productcount").innerHTML = --add;
+}
+
+<span>
+    
+
+
+                  // credit button  
+
+// Get the modal
+var modalcredit = document.getElementById('myModalcredit');
+
+// Get the button that opens the modal
+var btncredit = document.getElementById("mycre");
+
+// Get the <span> element that closes the modal
+var spancredit = document.getElementsByClassName("creditclose")[0];
+
+// When the user clicks the button, open the modal 
+btncredit.onclick = function() {
+  modalcredit.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+spancredit.onclick = function() {
+  modalcredit.style.display = "none";
+}
+
+                  // debit button  
+
+// Get the modal
+var modaldebit = document.getElementById('myModaldebit');
+
+// Get the button that opens the modal
+var btndebit = document.getElementById("mydeb");
+
+// Get the <span> element that closes the modal
+var spandebit = document.getElementsByClassName("debitclose")[0];
+
+// When the user clicks the button, open the modal 
+btndebit.onclick = function() {
+  modaldebit.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+spandebit.onclick = function() {
+  modaldebit.style.display = "none";
+}
+
+                        //  cod details
+
+
+
+function mycod() {
+alert("order placed sucessfully")
+    
+}
+
+    </script>
+</html>

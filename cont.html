@@ -1,0 +1,103 @@
+<html>
+<head>
+  <style>
+       li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 8px 14px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+  </style>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body style="background-image: url(https://tse4.mm.bing.net/th?id=OIP.T6g-yegDfJFpkxNOJYoR3wHaHa&pid=15.1&P=0&w=300&h=300);background-repeat: no-repeat;background-size: cover;">
+    <div class="w3-bar w3-black">
+          <a href="index.html"class="w3-bar-item w3-button w3-mobile">Home</a>
+          <li class="dropdown">
+                <a class="dropbtn">Admin</a>
+                <div class="dropdown-content">
+                    <a href="r1.html">Register</a>
+                    <a href="l1.html">Login-Here</a>
+                </div>
+            </li>
+          <li class="dropdown">
+                <a class="dropbtn">User</a>
+                <div class="dropdown-content">
+                    <a href="r2.html">Register</a>
+                    <a href="l2.html">Login-Here</a>
+                </div>
+            </li>
+          <a href="cont.html" class="w3-bar-item w3-button w3-right">Contact</a>
+        </div>
+<div class="w3-content w3-container w3-padding-64" id="contact">
+  <h3 class="w3-center">WHERE I WORK</h3>
+  <p class="w3-center"><em>I'd love your feedback!</em></p>
+
+  <div class="w3-row w3-padding-32 w3-section">
+    <div class="w3-col m4 w3-container">
+      <img src="https://imperialgoc.com/wp-content/uploads/2019/04/IT-Services.jpg" class="w3-image w3-round" style="width:100%;height:80px">
+    </div>
+    <div class="w3-col m8 w3-panel">
+      <div class="w3-large w3-margin-bottom">
+        <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Chicago, US<br>
+        <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Phone: +040-232355<br>
+        <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Email: O-shopping@mail.com<br>
+      </div>
+      <p><b>H</b>appy <b>S</b>hopping<img src="https://tse2.mm.bing.net/th?id=OIP.tUkHGbqSspCTeF_ZtDVv9wHaHa&pid=15.1&P=0&w=300&h=300" style="width: 25px;height: 25px">, or leave me a note:</p>
+      <form action="/action_page.php" target="_blank">
+        <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+          </div>
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+          </div>
+        </div>
+        <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+        <button class="w3-button w3-black w3-right w3-section" type="submit">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

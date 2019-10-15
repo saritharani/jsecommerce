@@ -1,0 +1,216 @@
+<html>
+    <head>
+        <title>page2</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+        <style>
+            * {box-sizing: border-box;}
+            h1{
+            position: relative;
+            -webkit-animation: mymove 5s infinite;
+            animation: mymove 5s infinite;
+        }
+        @-webkit-keyframes mymove{
+            from {left: 0px;}
+            to {left:200px;}
+        }
+        @keyframes mymove{
+            from {left: 0px;}
+            to {left: 200px;}
+        }
+
+            
+            .magnifingSection {
+              position: relative;
+            }
+            
+            .magnifingLens {
+              position: absolute;
+              border: 1px solid #d4d4d4;
+              /*set the size of the lens:*/
+              width: 40px;
+              height: 40px;
+            }
+            
+            .magnifingResult {
+              float: right;
+              margin-right: 300px;
+              border: 1px solid #d4d4d4;
+              /*set the size of the result div:*/
+              width: 300px;
+              height: 300px;
+            }
+             #pro-name{color: red;
+        font-size: 25px;
+        font-family: cursive;
+
+    }
+    #pro-price{color: grey;
+            font-size: 22px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="magnifingSection">
+            <h1 style="color: blue;text-align: center;background-image: url(https://tse4.mm.bing.net/th?id=OIP.qmoYqOD9VXeUlfjuA3Pz3gHaEo&pid=15.1&P=0&w=254&h=159);">Shop-here</h1>
+            <hr>
+            <br>
+            <br>
+            <img src="" id="image" height="300px" width="300px">
+            <div id="magDisplay" class="magnifingResult"></div>
+            
+        </div>
+        <p id="wholedescription" style="color: blue;font-size: 30px;font-family: sans-serif;"></p>
+        <p id="pro-name"></p>
+        <p id="pro-price"></p>
+        <button onclick="back()" style="font-size: 30px;background-color: black;color: white">Back</button>
+    </body>
+    <script>
+        function back(){
+            window.open("userpage.html","_blank");
+        }
+        var imgsrc=localStorage.getItem("images");
+        var imagesrc = document.getElementById("image").src=imgsrc;
+
+        var description=localStorage.getItem("description");
+        var descrip = document.getElementById("wholedescription").innerHTML=description;
+
+        var proname = localStorage.getItem("name");
+        var productname = document.getElementById("pro-name").innerHTML= proname;
+
+        var proprice = localStorage.getItem("price");
+        var productprice = document.getElementById("pro-price").innerHTML=proprice;
+
+
+        // var magDiv = document.getElementById("magDisplay");
+        // magDiv.style.display="none";
+
+        // var image = document.getElementById("image");
+        // image.addEventListener("mouseover",mouseOver);
+        // function mouseOver(){
+        //   magDiv.style.display="block";
+        // }
+
+        // Zooming Image at a Particular Position
+        function magnifing(imgId, showId){
+            var img, lens, show, cx, cy;
+            img = document.getElementById(imgId);
+            show = document.getElementById(showId);
+
+            // Create Lens
+            lens = document.createElement("div");
+            lens.setAttribute("class","magnifingLens");
+            img.parentElement.insertBefore(lens, img);
+
+            // Calculate the ratio b/w magnifingResult and Lens
+            cx = show.offsetWidth / lens.offsetWidth;
+            cy = show.offsetHeight / lens.offsetHeight;
+
+            // Set the background properties for show
+            show.style.backgroundImage = "url('" +img.src+ "')";
+            show.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+
+            // events, if someone moves the lens
+            lens.addEventListener("mousemove",lensMove);
+            img.addEventListener("mousemove",lensMove);
+
+            // event function
+            function lensMove(e){
+                var cursorPos, x, y;
+                e.preventDefault();
+
+                // Calculate the Cursor Position
+                cursorPos = getCursorPos(e);
+
+                // Calculate the Lens Position
+                lx = cursorPos.lx - (lens.offsetWidth/2);
+                ly = cursorPos.ly - (lens.offsetHeight/2);
+
+                // Prevent the Lens from being Outside the Image
+                if(lx > img.width - lens.offsetWidth){
+                    lx = img.width - lens.offsetWidth;
+                }
+                if(lx < 0){
+                    lx = 0;
+                }
+                
+                if(ly > img.height - lens.offsetHeight){
+                    ly = img.height - lens.offsetHeight;
+                }
+                if(ly < 0){
+                    ly = 0;
+                }
+
+                // Link those values to the Lens
+                lens.style.left = lx + "px";
+                lens.style.top = ly + "px";
+
+                // show what Lens Sees
+                show.style.backgroundPosition = "-" + (lx * cx) + "px -" + (ly * cy) + "px";
+            }
+            function getCursorPos(e) {
+                var imgPositions, lx = 0, ly = 0;
+                e = e || window.event;
+                
+                // get the x and y positions of the image
+                imgPositions = img.getBoundingClientRect();
+
+                // calculate the cursor's x and y coordinates, relative to the image
+                lx = e.pageX - imgPositions.left;
+                ly = e.pageY - imgPositions.top;
+
+                // consider any page scrolling
+                lx = lx - window.pageXOffset;
+                ly = ly - window.pageYOffset;
+                return {lx : lx, ly : ly};
+            }
+            
+        }
+        magnifing("image","magDisplay");
+    </script>
+     <footer class="w3-container w3-padding-32 w3-dark-grey">
+  <div class="w3-row-padding">
+    <div class="w3-third">
+      <h3>FOOTER</h3>
+      <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    </div>
+  
+    <div class="w3-third">
+      <h3>BLOG POSTS</h3>
+      <ul class="w3-ul w3-hoverable">
+        <li class="w3-padding-16">
+          <img src="https://tse3.mm.bing.net/th?id=OIP.Vq-33zn0YWW26Q8foAjo2wHaE6&pid=15.1&P=0&w=270&h=180" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Amazon</span><br>
+          <span>Sed mattis nunc</span>
+        </li>
+        <li class="w3-padding-16">
+          <img src="http://www.chameleonjohn.com/blog/wp-content/uploads/2014/06/online-shopping.jpg" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Club-Factory</span><br>
+          <span>Praes tinci sed</span>
+        </li> 
+      </ul>
+    </div>
+
+    <div class="w3-third">
+      <h3>POPULAR TAGS</h3>
+      <p>
+        <span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">London</span>
+        <span class="w3-tag w3-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">DIY</span>
+        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Family</span>
+        <span class="w3-tag w3-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Shopping</span>
+        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Games</span>
+      </p>
+    </div>
+
+  </div>
+  </footer>
+  
+  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+
+<!-- End page content -->
+</div>
+
+</html>
